@@ -12,10 +12,11 @@ import sys
 sys.path.append('pygame')
 import pygame
 sys.path.append('data')
+import Currency
 import Grid
 from Colors import *
 import random
-from Currency import *
+from CurrencyList import *
 
 def main():
 
@@ -46,9 +47,9 @@ def main():
     MARGIN = gameGrid.getTileMargin()
     WIDTH = gameGrid.getTileWidth()
     HEIGHT = gameGrid.getTileHeight()
-    font = pygame.font.Font("data/font/freesansbold.ttf", 22)
-    fontC = pygame.font.Font("data/font/freesansbold.ttf", int(gameGrid.getTileWidth()/2))
-    selCur = CANADIEN_CUR #selected currency
+    font = pygame.font.Font("freesansbold.ttf", 22)
+    fontC = pygame.font.Font("freesansbold.ttf", int(gameGrid.getTileWidth()/3))
+    selCur = CAN_CUR #selected currency
 
     dragging = False
     while not done:
@@ -67,7 +68,7 @@ def main():
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 dragging = False
-                score += gameGrid.combine(row,column)
+                score += gameGrid.combine(row,column,selCur)
                 gameGrid.unselectAll()
 
             if dragging:
@@ -97,7 +98,7 @@ def main():
 
         for column in range(gameGrid.getColumnLenght()):
             if gameGrid.getTileValue(0,column) == 0:
-                randCoin = random.randrange(CANADIEN_CUR.size() + 1)
+                randCoin = random.randrange(selCur.size() + 1)
                 gameGrid.setTileValue(0,column,randCoin)
 
         # Draw the grid
@@ -124,7 +125,12 @@ def main():
                                 WIDTH,
                                 HEIGHT])
                 if not gameGrid.getTileValue(row,column) == 0:
-                    textC = fontC.render(str(coin.getVal()) + '¢', True, BLACK,coin.getCol())
+                    if coin.getVal() >= 100:
+                        curType = selCur.getNType()
+                        textC = fontC.render(str(coin.getVal()/100) + curType, True, BLACK,coin.getCol())
+                    else:
+                        curType = selCur.getType()
+                        textC = fontC.render(str(coin.getVal()) + curType, True, BLACK,coin.getCol())
                     textRect = textC.get_rect()
                     textRect.center = (((MARGIN + WIDTH) * column + MARGIN ) + WIDTH/2, ((MARGIN + HEIGHT) * row + MARGIN) + HEIGHT/2)
                     screen.blit(textC, textRect)
@@ -134,12 +140,13 @@ def main():
 
         X = WINDOW_LENGHT - 400 + 200
         Y = 20
-        selMoney = str(gameGrid.getSelectedValue() / 100)
-        text = font.render('Score: ' + str(score / 100)  + '$', True, WHITE,BLACK)
+        selMoney = str(gameGrid.getSelectedValue(selCur) / 100)
+        nt = selCur.getNType()
+        text = font.render('Score: ' + str(score / 100)  + nt, True, WHITE,BLACK)
         textRect = text.get_rect()
         textRect.center = (X, Y)
         screen.blit(text, textRect)
-        text = font.render('Current selection value: ' + selMoney + '$', True, WHITE,BLACK)
+        text = font.render('Current selection value: ' + selMoney + nt, True, WHITE,BLACK)
         textRect = text.get_rect()
         textRect.center = (X, Y + 50)
         screen.blit(text, textRect)

@@ -1,7 +1,6 @@
 import Tile
 import Currency
 from Colors import *
-from Currency import *
 
 class grid():
 	def __init__(self):
@@ -43,19 +42,19 @@ class grid():
 	def getTileMargin(self):
 		return self.tMargin
 
-	def getSelectedValue(self):
+	def getSelectedValue(self,cur):
 		total = 0
 		for row in range(self.row):
 			for column in range(self.column):
 				if self.grid[row][column].isSelected():
-					total += CANADIEN_CUR.getCoinById(self.grid[row][column].getValue()).getVal()
+					total += cur.getCoinById(self.grid[row][column].getValue()).getVal()
 		return total
 
-	def combine(self,row,column):
-		total = self.getSelectedValue()
+	def combine(self,row,column,cur):
+		total = self.getSelectedValue(cur)
 		combined = False
 		cashGain = 0
-		result = CANADIEN_CUR.getIdByValue(total)
+		result = cur.getIdByValue(total)
 		#print(result)
 		if result == "Bill!":
 			combined = True
