@@ -49,7 +49,7 @@ def main():
     HEIGHT = gameGrid.getTileHeight()
     font = pygame.font.Font("freesansbold.ttf", 22)
     fontC = pygame.font.Font("freesansbold.ttf", int(gameGrid.getTileWidth()/3))
-    selCur = CAN_CUR #selected currency
+    selCur = BRIT_CUR #selected currency
 
     dragging = False
     while not done:
