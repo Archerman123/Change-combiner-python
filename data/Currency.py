@@ -8,6 +8,9 @@ class currency():
 		self.changeType = changeType
 		self.noteType = noteType
 
+	def getName(self):
+		return self.currencyName
+
 	def getNType(self):
 		return self.noteType
 

@@ -22,37 +22,36 @@ def draw_text(text, font, color, surface, x, y):
     surface.blit(textobj, textrect)
 
 
-click = False
+
 
 
 def main_menu():
+	click = False
 	while True:
 		screen.fill((0, 0, 0))
 		draw_text('main menu', font, (255, 255, 255), screen, 20, 20)
 
 		mx, my = pygame.mouse.get_pos()
 
-		button_1 = pygame.Rect(50, 100, 200, 50)
-		button_2 = pygame.Rect(50, 200, 200, 50)
-		button_3 = pygame.Rect(50, 300, 200, 50)
-		button_4 = pygame.Rect(50, 400, 200, 50)
-		if button_1.collidepoint((mx, my)):
-			if click:
-				game(CAN_CUR)
-		if button_2.collidepoint((mx, my)):
-			if click:
-				game(CAN_CUR_TRUE)
-		if button_3.collidepoint((mx, my)):
-			if click:
-				game(BRIT_CUR)
-		if button_4.collidepoint((mx, my)):
+		buttons = []
+		yLevel = 100
+		for cur in CUR_LIST:
+			buttons.append([pygame.Rect(50, yLevel, 200, 25),cur])
+			pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(50, yLevel, 200, 25))
+			draw_text(cur.getName(), font, (255, 255, 255), screen, 50,yLevel + 5)
+			yLevel += 50
+
+		for butts in buttons:
+			if butts[0].collidepoint((mx, my)):
+				if click:
+					game(butts[1])
+
+		button_options = pygame.Rect(50, yLevel, 200, 25)
+		if button_options.collidepoint((mx, my)):
 			if click:
 				options()
-		pygame.draw.rect(screen, (255, 0, 0), button_1)
-		pygame.draw.rect(screen, (255, 0, 0), button_2)
-		pygame.draw.rect(screen, (255, 0, 0), button_3)
-		pygame.draw.rect(screen, (255, 0, 0), button_4)
-
+		pygame.draw.rect(screen, (255, 0, 0), button_options)
+		draw_text("Options", font, (255, 255, 255), screen, 50,yLevel + 5)
 		click = False
 		for event in pygame.event.get():
 			if event.type == QUIT:

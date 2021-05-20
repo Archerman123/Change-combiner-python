@@ -16,8 +16,9 @@ import Currency
 import Grid
 from Colors import *
 import random
+from CurrencyList import CAN_CUR
 
-def game(currency):
+def game(currency = CAN_CUR):
 
     gameGrid = Grid.grid()
 
@@ -160,4 +161,4 @@ def game(currency):
     pygame.quit()
 
 if __name__ == "__main__":
-    main()
+    game()
