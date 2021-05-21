@@ -54,7 +54,6 @@ def game(currency = CAN_CUR):
     dragging = False
     while not done:
         for event in pygame.event.get():  # User did something
-
             # User clicks the mouse. Get the position
             pos = pygame.mouse.get_pos()
             # Change the x/y screen coordinates to grid coordinates
@@ -63,6 +62,9 @@ def game(currency = CAN_CUR):
 
             if event.type == pygame.QUIT:  # If user clicked close
                 done = True  # Flag that we are done so we exit this loop
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    done = True
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 dragging = True
 
@@ -76,17 +78,16 @@ def game(currency = CAN_CUR):
                     if column < gameGrid.getColumnLenght():
                         if gameGrid.isSelect(row,column) == False:
                             gameGrid.setSelect(row,column,True)
-
             #print("Click ", pos, "Grid coordinates: ", row, column)
 
 
     # Set the screen background
         screen.fill(BLACK)
 
+
+
+
         # grid physics
-        rain = random.randrange(gameGrid.getRowLenght())
-
-
         for row in range(gameGrid.getRowLenght()-1,-1,-1):
             for column in range(gameGrid.getColumnLenght()-1,-1,-1):
                 if gameGrid.getTileValue(row,column) > 0:
@@ -96,9 +97,10 @@ def game(currency = CAN_CUR):
                             gameGrid.setTileValue(row+1,column,fallCoin)
                             gameGrid.setTileValue(row,column,0)
 
+        # Generate raindom coins at the top
         for column in range(gameGrid.getColumnLenght()):
             if gameGrid.getTileValue(0,column) == 0:
-                randCoin = random.randrange(selCur.size() + 1)
+                randCoin = random.randrange(5)
                 gameGrid.setTileValue(0,column,randCoin)
 
         # Draw the grid
@@ -157,8 +159,6 @@ def game(currency = CAN_CUR):
         # --- Limit to 60 frames per second
         clock.tick(30)
 
-    # Close the window and quit.
-    pygame.quit()
 
 if __name__ == "__main__":
     game()

@@ -44,7 +44,7 @@ def main_menu():
 		for butts in buttons:
 			if butts[0].collidepoint((mx, my)):
 				if click:
-					game(butts[1])
+					Game.game((butts[1]))
 
 		button_options = pygame.Rect(50, yLevel, 200, 25)
 		if button_options.collidepoint((mx, my)):
@@ -67,26 +67,6 @@ def main_menu():
 
 		pygame.display.update()
 		mainClock.tick(60)
-
-
-def game(currency):
-	running = True
-	while running:
-		screen.fill((0, 0, 0))
-
-		Game.game(currency)
-
-		for event in pygame.event.get():
-			if event.type == QUIT:
-				pygame.quit()
-				sys.exit()
-		if event.type == KEYDOWN:
-			if event.key == K_ESCAPE:
-				running = False
-
-		pygame.display.update()
-		mainClock.tick(60)
-
 
 def options():
     running = True

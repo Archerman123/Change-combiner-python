@@ -3,15 +3,14 @@ from Colors import *
 
 CUR_LIST = []
 
-CAN_CUR = Currency.currency("Canadien Basic",'¢','$')
+CAN_CUR = Currency.currency("Canadian Basic",'¢','$')
 CAN_CUR.addCoin(1,BRONZE)
 CAN_CUR.addCoin(5,SILVER)
 CAN_CUR.addCoin(10,DARK_GRAY)
 CAN_CUR.addCoin(25,GOLD)
 CAN_CUR.addBill(100)
 
-CAN_CUR_TRUE = Currency.currency("True Canadien",'¢','$')
-#CAN_CUR_TRUE.addCoin(1,BRONZE)
+CAN_CUR_TRUE = Currency.currency("True Canadian",'¢','$')
 CAN_CUR_TRUE.addCoin(5,SILVER)
 CAN_CUR_TRUE.addCoin(10,DARK_GRAY)
 CAN_CUR_TRUE.addCoin(25,GOLD)
@@ -43,6 +42,8 @@ BRIT_CUR_TRUE.addBill(500)
 BRIT_CUR_TRUE.addBill(2000)
 
 AUST_CUR = Currency.currency("Australian dollar basic",'c','$')
+AUST_CUR.addCoin(1,BRONZE)
+AUST_CUR.addCoin(2,DARK_BROWN)
 AUST_CUR.addCoin(5,SILVER)
 AUST_CUR.addCoin(10,DARK_GRAY)
 AUST_CUR.addCoin(20,GOLD)
