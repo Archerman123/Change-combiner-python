@@ -61,10 +61,11 @@ def game(currency = CAN_CUR):
             row = pos[1] // (HEIGHT + MARGIN)
 
             if event.type == pygame.QUIT:  # If user clicked close
-                done = True  # Flag that we are done so we exit this loop
+                pygame.quit()
+                sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    done = True
+                    done = True # Flag that we are done so we exit this loop
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 dragging = True
 
