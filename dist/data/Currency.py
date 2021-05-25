@@ -1,10 +1,21 @@
 import Coin
-from Colors import *
+
 class currency():
-	def __init__(self,name):
+	def __init__(self,name,changeType,noteType = ''):
 		self.currencyName = name
 		self.wallet = []
 		self.bills = []
+		self.changeType = changeType
+		self.noteType = noteType
+
+	def getName(self):
+		return self.currencyName
+
+	def getNType(self):
+		return self.noteType
+
+	def getType(self):
+		return self.changeType
 
 	def addCoin(self,value,color):
 		self.wallet.append(Coin.coin(value,color))
@@ -33,14 +44,3 @@ class currency():
 			if bills == value:
 				return "Bill!"
 		return False
-
-CANADIEN_CUR = currency("Canadien")
-CANADIEN_CUR.addCoin(1,BRONZE)
-CANADIEN_CUR.addCoin(5,SILVER)
-CANADIEN_CUR.addCoin(10,DARK_GRAY)
-CANADIEN_CUR.addCoin(25,GOLD)
-#CANADIEN_CUR.addCoin(100,GOLD)
-#CANADIEN_CUR.addCoin(200,GOLD)
-CANADIEN_CUR.addBill(100)
-CANADIEN_CUR.addBill(200)
-CANADIEN_CUR.addBill(500)

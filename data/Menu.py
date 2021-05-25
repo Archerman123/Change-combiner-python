@@ -1,7 +1,6 @@
 #!/usr/bin/python3.4
 # Setup Python ----------------------------------------------- #
 # taken from https://www.youtube.com/watch?v=0RryiSjpJn0&ab_channel=DaFluffyPotato
-from pygame.locals import *
 import pygame
 import sys
 import Game
@@ -12,7 +11,7 @@ pygame.init()
 pygame.display.set_caption('game base')
 screen = pygame.display.set_mode((500, 500), 0, 32)
 
-font = pygame.font.SysFont(None, 20)
+font = pygame.font.Font("freesansbold.ttf", 20)
 
 
 def draw_text(text, font, color, surface, x, y):
@@ -36,8 +35,8 @@ def main_menu():
 		buttons = []
 		yLevel = 100
 		for cur in CUR_LIST:
-			buttons.append([pygame.Rect(50, yLevel, 200, 25),cur])
-			pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(50, yLevel, 200, 25))
+			buttons.append([pygame.Rect(50, yLevel, 250, 25),cur])
+			pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(50, yLevel, 250, 25))
 			draw_text(cur.getName(), font, (255, 255, 255), screen, 50,yLevel + 5)
 			yLevel += 50
 
@@ -46,7 +45,7 @@ def main_menu():
 				if click:
 					Game.game((butts[1]))
 
-		button_options = pygame.Rect(50, yLevel, 200, 25)
+		button_options = pygame.Rect(50, yLevel, 250, 25)
 		if button_options.collidepoint((mx, my)):
 			if click:
 				options()
@@ -54,14 +53,14 @@ def main_menu():
 		draw_text("Options", font, (255, 255, 255), screen, 50,yLevel + 5)
 		click = False
 		for event in pygame.event.get():
-			if event.type == QUIT:
+			if event.type == pygame.QUIT:
 				pygame.quit()
 				sys.exit()
-			if event.type == KEYDOWN:
-				if event.key == K_ESCAPE:
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_ESCAPE:
 					pygame.quit()
 					sys.exit()
-			if event.type == MOUSEBUTTONDOWN:
+			if event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
 					click = True
 
@@ -75,11 +74,11 @@ def options():
 
         draw_text('options', font, (255, 255, 255), screen, 20, 20)
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
                     running = False
 
         pygame.display.update()
