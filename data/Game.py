@@ -12,18 +12,19 @@ import sys
 sys.path.append('pygame')
 import pygame
 sys.path.append('data')
+sys.path.append('data/font')
 import Currency
 import Grid
 from Colors import *
 import random
 from CurrencyList import CAN_CUR
+from FontHandler import *
 
 def game(currency = CAN_CUR):
 
     gameGrid = Grid.grid()
 
     pygame.init()
-    pygame.font.init()
 
     WINDOW_LENGHT = gameGrid.getTileMargin() + gameGrid.getRowLenght() * (gameGrid.getTileWidth() + gameGrid.getTileMargin()) + 400
 
@@ -47,8 +48,8 @@ def game(currency = CAN_CUR):
     MARGIN = gameGrid.getTileMargin()
     WIDTH = gameGrid.getTileWidth()
     HEIGHT = gameGrid.getTileHeight()
-    font = pygame.font.Font("freesansbold.ttf", 22)
-    fontC = pygame.font.Font("freesansbold.ttf", int(gameGrid.getTileWidth()/3))
+    font = UIFONT
+    fontC = makeFont(gameGrid.getTileWidth()/3)
     selCur = currency #selected currency
 
     dragging = False

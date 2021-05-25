@@ -5,24 +5,20 @@ import pygame
 import sys
 import Game
 from CurrencyList import *
+from FontHandler import *
 # Setup pygame/window ---------------------------------------- #
 mainClock = pygame.time.Clock()
 pygame.init()
 pygame.display.set_caption('game base')
 screen = pygame.display.set_mode((500, 500), 0, 32)
 
-font = pygame.font.Font("freesansbold.ttf", 20)
-
+font = MENUFONT
 
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
     textrect = textobj.get_rect()
     textrect.topleft = (x, y)
     surface.blit(textobj, textrect)
-
-
-
-
 
 def main_menu():
 	click = False
