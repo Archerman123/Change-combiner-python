@@ -17,8 +17,8 @@ class currency():
 	def getType(self):
 		return self.changeType
 
-	def addCoin(self,value,color):
-		self.wallet.append(Coin.coin(value,color))
+	def addCoin(self,value,color, image = ""):
+		self.wallet.append(Coin.coin(value,color, image))
 
 	def addBill(self,value):
 		self.bills.append(value)

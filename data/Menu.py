@@ -32,7 +32,7 @@ def main_menu():
 		yLevel = 100
 		for cur in CUR_LIST:
 			buttons.append([pygame.Rect(50, yLevel, 250, 25),cur])
-			pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(50, yLevel, 250, 25))
+			pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(50, yLevel, 300, 25))
 			draw_text(cur.getName(), font, (255, 255, 255), screen, 50,yLevel + 5)
 			yLevel += 50
 
@@ -41,7 +41,7 @@ def main_menu():
 				if click:
 					Game.game((butts[1]))
 
-		button_options = pygame.Rect(50, yLevel, 250, 25)
+		button_options = pygame.Rect(50, yLevel, 300, 25)
 		if button_options.collidepoint((mx, my)):
 			if click:
 				options()

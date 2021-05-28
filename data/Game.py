@@ -119,25 +119,44 @@ def game(currency = CAN_CUR):
                 coin = selCur.getCoinById(gameGrid.getTileValue(row,column))
                 color = coin.getCol()
 
-                if gameGrid.getTileValue(row,column) == 0:
+
+                if not selCur.getCoinById(gameGrid.getTileValue(row,column)).getImg() == "":
                     color = WHITE
 
-                pygame.draw.rect(screen,
-                                color,
-                                [(MARGIN + WIDTH) * column + MARGIN,
+                    pygame.draw.rect(screen,
+                                    color,
+                                    [(MARGIN + WIDTH) * column + MARGIN,
+                                    (MARGIN + HEIGHT) * row + MARGIN,
+                                    WIDTH,
+                                    HEIGHT])
+                    img = selCur.getCoinById(gameGrid.getTileValue(row,column)).getImg()
+                    img = pygame.transform.scale(img, (WIDTH, HEIGHT))
+                    screen.blit(img,[(MARGIN + WIDTH) * column + MARGIN,
                                 (MARGIN + HEIGHT) * row + MARGIN,
                                 WIDTH,
                                 HEIGHT])
+                else:
+                    if gameGrid.getTileValue(row,column) == 0:
+                        color = WHITE
+
+                    pygame.draw.rect(screen,
+                                    color,
+                                    [(MARGIN + WIDTH) * column + MARGIN,
+                                    (MARGIN + HEIGHT) * row + MARGIN,
+                                    WIDTH,
+                                    HEIGHT])
                 if not gameGrid.getTileValue(row,column) == 0:
                     if coin.getVal() >= 100:
                         curType = selCur.getNType()
-                        textC = fontC.render(str(coin.getVal()/100) + curType, True, BLACK,coin.getCol())
+                        textC = fontC.render(str(coin.getVal()/100) + curType, True, BLACK,None)
                     else:
                         curType = selCur.getType()
-                        textC = fontC.render(str(coin.getVal()) + curType, True, BLACK,coin.getCol())
+                        textC = fontC.render(str(coin.getVal()) + curType, True, BLACK,None)
                     textRect = textC.get_rect()
                     textRect.center = (((MARGIN + WIDTH) * column + MARGIN ) + WIDTH/2, ((MARGIN + HEIGHT) * row + MARGIN) + HEIGHT/2)
                     screen.blit(textC, textRect)
+
+
 
 
         # Draw info

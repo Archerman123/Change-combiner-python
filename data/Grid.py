@@ -6,9 +6,9 @@ class grid():
 	def __init__(self):
 		self.row = 10
 		self.column = 10
-		self.tWidth = 50
-		self.tHeight = 50
-		self.tMargin = 10
+		self.tWidth = 75
+		self.tHeight = 75
+		self.tMargin = 15
 		self.grid = []
 		self.regenGrid()
 

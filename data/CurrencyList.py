@@ -1,7 +1,25 @@
 import Currency
 from Colors import *
+import pygame
 
 CUR_LIST = []
+
+CAN_CUR_IMG = Currency.currency("Canadian Basic with images",'¢','$')
+CAN_CUR_IMG.addCoin(1,BRONZE,pygame.image.load("data/img/Can1Cent.png"))
+CAN_CUR_IMG.addCoin(5,SILVER,pygame.image.load("data/img/Can5Cent.png"))
+CAN_CUR_IMG.addCoin(10,DARK_GRAY,pygame.image.load("data/img/Can10Cent.png"))
+CAN_CUR_IMG.addCoin(25,GOLD,pygame.image.load("data/img/Can25Cent.png"))
+CAN_CUR_IMG.addBill(100)
+
+CAN_CUR_TRUE_IMG = Currency.currency("True Canadian with images",'¢','$')
+CAN_CUR_TRUE_IMG.addCoin(5,SILVER,pygame.image.load("data/img/Can5Cent.png"))
+CAN_CUR_TRUE_IMG.addCoin(10,DARK_GRAY,pygame.image.load("data/img/Can10Cent.png"))
+CAN_CUR_TRUE_IMG.addCoin(25,GOLD,pygame.image.load("data/img/Can25Cent.png"))
+CAN_CUR_TRUE_IMG.addCoin(100,BLUE,pygame.image.load("data/img/Can1Dollar.png"))
+CAN_CUR_TRUE_IMG.addCoin(200,PURPLE,pygame.image.load("data/img/Can2Dollar.png"))
+CAN_CUR_TRUE_IMG.addBill(500)
+CAN_CUR_TRUE_IMG.addBill(1000)
+CAN_CUR_TRUE_IMG.addBill(2000)
 
 CAN_CUR = Currency.currency("Canadian Basic",'¢','$')
 CAN_CUR.addCoin(1,BRONZE)
@@ -51,7 +69,9 @@ AUST_CUR.addCoin(50,BLUE)
 AUST_CUR.addBill(100)
 
 CUR_LIST.append(CAN_CUR)
+CUR_LIST.append(CAN_CUR_IMG)
 CUR_LIST.append(CAN_CUR_TRUE)
+CUR_LIST.append(CAN_CUR_TRUE_IMG)
 CUR_LIST.append(BRIT_CUR)
 CUR_LIST.append(BRIT_CUR_TRUE)
 CUR_LIST.append(AUST_CUR)
