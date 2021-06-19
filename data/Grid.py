@@ -8,7 +8,7 @@ class grid():
 		self.column = 10
 		self.tWidth = 75
 		self.tHeight = 75
-		self.tMargin = 15
+		self.tMargin = 1
 		self.grid = []
 		self.regenGrid()
 

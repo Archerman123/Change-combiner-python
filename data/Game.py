@@ -20,6 +20,9 @@ import random
 from CurrencyList import CAN_CUR
 from FontHandler import *
 
+TILE_IMG_ONE = pygame.image.load("data/img/Tile1.png")
+TILE_IMG_TWO = pygame.image.load("data/img/Tile2.png")
+
 def game(currency = CAN_CUR):
 
     gameGrid = Grid.grid()
@@ -129,12 +132,21 @@ def game(currency = CAN_CUR):
                                     (MARGIN + HEIGHT) * row + MARGIN,
                                     WIDTH,
                                     HEIGHT])
-                    img = selCur.getCoinById(gameGrid.getTileValue(row,column)).getImg()
-                    img = pygame.transform.scale(img, (WIDTH, HEIGHT))
-                    screen.blit(img,[(MARGIN + WIDTH) * column + MARGIN,
+                    imgTile = TILE_IMG_ONE
+                    imgTile = pygame.transform.scale(imgTile, (WIDTH, HEIGHT))
+                    screen.blit(imgTile,[(MARGIN + WIDTH) * column + MARGIN,
                                 (MARGIN + HEIGHT) * row + MARGIN,
                                 WIDTH,
                                 HEIGHT])
+                    coin = selCur.getCoinById(gameGrid.getTileValue(row,column))
+                    imgC = coin.getImg()
+                    scale = coin.getScale()/100
+                    imgC = pygame.transform.scale(imgC,(WIDTH,HEIGHT))
+                    screen.blit(imgC,
+                                    [
+                                        ((MARGIN + WIDTH)* column + MARGIN),
+                                        ((MARGIN + HEIGHT ) * row+ MARGIN),
+                                    ])
                 else:
                     if gameGrid.getTileValue(row,column) == 0:
                         color = WHITE
@@ -154,7 +166,7 @@ def game(currency = CAN_CUR):
                         textC = fontC.render(str(coin.getVal()) + curType, True, BLACK,None)
                     textRect = textC.get_rect()
                     textRect.center = (((MARGIN + WIDTH) * column + MARGIN ) + WIDTH/2, ((MARGIN + HEIGHT) * row + MARGIN) + HEIGHT/2)
-                    screen.blit(textC, textRect)
+                    #screen.blit(textC, textRect)
 
 
 

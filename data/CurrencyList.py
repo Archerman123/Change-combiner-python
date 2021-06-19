@@ -5,10 +5,10 @@ import pygame
 CUR_LIST = []
 
 CAN_CUR_IMG = Currency.currency("Canadian Basic with images",'¢','$')
-CAN_CUR_IMG.addCoin(1,BRONZE,pygame.image.load("data/img/Can1Cent.png"))
-CAN_CUR_IMG.addCoin(5,SILVER,pygame.image.load("data/img/Can5Cent.png"))
+CAN_CUR_IMG.addCoin(1,BRONZE,pygame.image.load("data/img/Can1Cent.png"),110)
+CAN_CUR_IMG.addCoin(5,SILVER,pygame.image.load("data/img/Can5Cent.png"),135)
 CAN_CUR_IMG.addCoin(10,DARK_GRAY,pygame.image.load("data/img/Can10Cent.png"))
-CAN_CUR_IMG.addCoin(25,GOLD,pygame.image.load("data/img/Can25Cent.png"))
+CAN_CUR_IMG.addCoin(25,GOLD,pygame.image.load("data/img/Can25Cent.png"),150)
 CAN_CUR_IMG.addBill(100)
 
 CAN_CUR_TRUE_IMG = Currency.currency("True Canadian with images",'¢','$')
