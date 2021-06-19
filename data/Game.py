@@ -17,14 +17,18 @@ import Currency
 import Grid
 from Colors import *
 import random
-from CurrencyList import CAN_CUR
+from CurrencyList import CUR_LIST
 from FontHandler import *
 
 TILE_IMG_ONE = pygame.image.load("data/img/Tile1.png")
 TILE_IMG_TWO = pygame.image.load("data/img/Tile2.png")
 
-def game(currency = CAN_CUR):
+def game(options):
 
+    showText = options["Text Overlay"]
+    for Cur in CUR_LIST:
+        if options["Currency"] == Cur.getName():
+            currency = Cur
     gameGrid = Grid.grid()
 
     pygame.init()
@@ -164,9 +168,10 @@ def game(currency = CAN_CUR):
                     else:
                         curType = selCur.getType()
                         textC = fontC.render(str(coin.getVal()) + curType, True, BLACK,None)
-                    textRect = textC.get_rect()
-                    textRect.center = (((MARGIN + WIDTH) * column + MARGIN ) + WIDTH/2, ((MARGIN + HEIGHT) * row + MARGIN) + HEIGHT/2)
-                    #screen.blit(textC, textRect)
+                    if showText == "True":
+                        textRect = textC.get_rect()
+                        textRect.center = (((MARGIN + WIDTH) * column + MARGIN ) + WIDTH/2, ((MARGIN + HEIGHT) * row + MARGIN) + HEIGHT/2)
+                        screen.blit(textC, textRect)
 
 
 
