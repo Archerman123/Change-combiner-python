@@ -18,7 +18,6 @@ optionFile = JsonReader.reader("data/Options.json")
 
 def changeOptions(toChange, newVal,options):
 		options[toChange] = newVal
-		print(options)
 		optionFile.writeData(options)
 
 def draw_text(text, font, color, surface, x, y):
@@ -29,8 +28,6 @@ def draw_text(text, font, color, surface, x, y):
 
 def main_menu():
 	options = optionFile.getData()
-	print(options)
-
 	click = False
 	while True:
 		screen.fill((0, 0, 0))
@@ -88,7 +85,6 @@ def optionMenu(options):
 		btn1 = pygame.Rect(20, 80, 125, 20)
 		if btn1.collidepoint((mx, my)):
 			if click:
-				print("clicked false")
 				changeOptions("Text Overlay","False",options)
 
 		btn2 = pygame.Rect(175, 80, 125, 20)
