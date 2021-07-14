@@ -7,10 +7,12 @@ import Game
 from CurrencyList import *
 from FontHandler import *
 import JsonReader
+
+
 # Setup pygame/window ---------------------------------------- #
 mainClock = pygame.time.Clock()
 pygame.init()
-pygame.display.set_caption('game base')
+pygame.display.set_caption("Coin combiner: Menu")
 screen = pygame.display.set_mode((500, 500), 0, 32)
 
 font = MENUFONT
@@ -27,8 +29,12 @@ def draw_text(text, font, color, surface, x, y):
     surface.blit(textobj, textrect)
 
 def main_menu():
+
+
+
 	options = optionFile.getData()
 	click = False
+	CurrentGame = False
 	while True:
 		screen.fill((0, 0, 0))
 		draw_text('main menu', font, (255, 255, 255), screen, 20, 20)
@@ -42,10 +48,21 @@ def main_menu():
 		draw_text("New Game", font, (255, 255, 255), screen, 50,yLevel + 5)
 		yLevel += 50
 
-		for butts in buttons:
-			if butts[0].collidepoint((mx, my)):
+		if CurrentGame:
+			buttons.append([pygame.Rect(50, yLevel, 250, 25)])
+			pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(50, yLevel, 300, 25))
+			draw_text("continue", font, (255, 255, 255), screen, 50,yLevel + 5)
+			yLevel += 50
+
+			if buttons[1][0].collidepoint((mx, my)):
 				if click:
-					Game.game(options)
+					CurrentGame.play()
+
+		if buttons[0][0].collidepoint((mx, my)):
+			if click:
+				CurrentGame = Game.game((options))
+
+
 
 		button_options = pygame.Rect(50, yLevel, 300, 25)
 		if button_options.collidepoint((mx, my)):
