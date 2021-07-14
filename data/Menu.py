@@ -112,8 +112,8 @@ def optionMenu(options):
 
 		pygame.draw.rect(screen, (255, 0, 0), btn3)
 		pygame.draw.rect(screen, (255, 0, 0), btn4)
-		draw_text("<", font, (255, 255, 255), screen, 20,140)
-		draw_text(">", font, (255, 255, 255), screen, 175,140)
+		draw_text("<", font, (255, 255, 255), screen, 20,150)
+		draw_text(">", font, (255, 255, 255), screen, 175,150)
 
 		click = False
 		for event in pygame.event.get():
