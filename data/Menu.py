@@ -37,11 +37,10 @@ def main_menu():
 
 		buttons = []
 		yLevel = 100
-		for cur in CUR_LIST:
-			buttons.append([pygame.Rect(50, yLevel, 250, 25),cur])
-			pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(50, yLevel, 300, 25))
-			draw_text(cur.getName(), font, (255, 255, 255), screen, 50,yLevel + 5)
-			yLevel += 50
+		buttons.append([pygame.Rect(50, yLevel, 250, 25)])
+		pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(50, yLevel, 300, 25))
+		draw_text("New Game", font, (255, 255, 255), screen, 50,yLevel + 5)
+		yLevel += 50
 
 		for butts in buttons:
 			if butts[0].collidepoint((mx, my)):
@@ -52,6 +51,7 @@ def main_menu():
 		if button_options.collidepoint((mx, my)):
 			if click:
 				optionMenu(options)
+
 		pygame.draw.rect(screen, (255, 0, 0), button_options)
 		draw_text("Options", font, (255, 255, 255), screen, 50,yLevel + 5)
 		click = False
@@ -94,8 +94,26 @@ def optionMenu(options):
 
 		pygame.draw.rect(screen, (255, 0, 0), btn1)
 		pygame.draw.rect(screen, (255, 0, 0), btn2)
-		draw_text("Make False", font, (255, 255, 255), screen, 20,80)
-		draw_text("Make True", font, (255, 255, 255), screen, 175,80)
+		draw_text("Disable", font, (255, 255, 255), screen, 20,80)
+		draw_text("Enable", font, (255, 255, 255), screen, 175,80)
+
+		cur = options["Currency"]
+		cur = CUR_LIST[int(cur)].getName()
+		draw_text('Currency: ' + cur, font, (255, 255, 255), screen, 20, 120)
+		btn3 = pygame.Rect(20, 150, 125, 20)
+		if btn3.collidepoint((mx, my)):
+			if click:
+				curSel(-1, options)
+
+		btn4 = pygame.Rect(175, 150, 125, 20)
+		if btn4.collidepoint((mx, my)):
+			if click:
+				curSel(1, options)
+
+		pygame.draw.rect(screen, (255, 0, 0), btn3)
+		pygame.draw.rect(screen, (255, 0, 0), btn4)
+		draw_text("<", font, (255, 255, 255), screen, 20,140)
+		draw_text(">", font, (255, 255, 255), screen, 175,140)
 
 		click = False
 		for event in pygame.event.get():
@@ -112,6 +130,12 @@ def optionMenu(options):
 		pygame.display.update()
 		mainClock.tick(60)
 
-
+def curSel(jump,options):
+	if int(options["Currency"])+jump >= len(CUR_LIST):
+		options["Currency"] = 0
+	elif int(options["Currency"])+jump <= 0:
+		options["Currency"] = len(CUR_LIST)-1
+	else:
+		options["Currency"] = int(options["Currency"])+jump
 
 main_menu()

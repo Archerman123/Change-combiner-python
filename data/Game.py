@@ -26,9 +26,7 @@ TILE_IMG_TWO = pygame.image.load("data/img/Tile2.png")
 def game(options):
 
     showText = options["Text Overlay"]
-    for Cur in CUR_LIST:
-        if options["Currency"] == Cur.getName():
-            currency = Cur
+    currency = CUR_LIST[int(options["Currency"])] 
     gameGrid = Grid.grid()
 
     pygame.init()
