@@ -4,3 +4,4 @@ build
 dist
 data/Options.json
 dist/main.exe
+data/Options.json

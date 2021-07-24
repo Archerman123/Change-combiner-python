@@ -126,9 +126,11 @@ class game():
                                     HEIGHT + MARGIN*2])
                     coin = selCur.getCoinById(self.gameGrid.getTileValue(row,column))
                     color = coin.getCol()
-
+                    showText = self.showText
                     if not selCur.getCoinById(self.gameGrid.getTileValue(row,column)).getImg() == "":
+
                         self.vue.printEmptySquare(column,row)
+
                         if not self.gameGrid.getTileValue(row,column) == 0:
                             coin = selCur.getCoinById(self.gameGrid.getTileValue(row,column))
                             imgC = coin.getImg()
@@ -148,7 +150,7 @@ class game():
                                         (MARGIN + HEIGHT) * row + MARGIN,
                                         WIDTH,
                                         HEIGHT])
-
+                        showText = "True"
                     if not self.gameGrid.getTileValue(row,column) == 0:
                         if coin.getVal() >= 100:
                             curType = selCur.getNType()
@@ -156,7 +158,7 @@ class game():
                         else:
                             curType = selCur.getType()
                             textC = fontC.render(str(coin.getVal()) + curType, True, BLACK,None)
-                        if self.showText == "True":
+                        if showText == "True":
                             textRect = textC.get_rect()
                             textRect.center = (((MARGIN + WIDTH) * column + MARGIN ) + WIDTH/2, ((MARGIN + HEIGHT) * row + MARGIN) + HEIGHT/2)
                             screen.blit(textC, textRect)
@@ -165,22 +167,22 @@ class game():
 
             X = WINDOW_LENGHT - 400 + 200
             Y = 20
-            selMoney = str(self.gameGrid.getSelectedValue(selCur) / 100)
+            selMoney = str(format(self.gameGrid.getSelectedValue(selCur) / 100,'.2f'))
             nt = selCur.getNType()
-            text = font.render('Score: ' + str(self.score / 100)  + nt, True, WHITE,BLACK)
+            text = font.render('Score: ' + str(format(self.score / 100,'.2f'))  + nt, True, WHITE,BLACK)
             textRect = text.get_rect()
             textRect.center = (X, Y)
             screen.blit(text, textRect)
-            text = font.render('Current selection value: ' + selMoney + nt, True, WHITE,BLACK)
+            text = font.render(selMoney + nt, True, WHITE,BLACK)
             textRect = text.get_rect()
-            textRect.center = (X, Y + 50)
+            textRect.center = (pos[0]+20, pos[1] - 10)
             screen.blit(text, textRect)
 
             # --- Go ahead and update the screen with what we've drawn.
             pygame.display.flip()
 
             # --- Limit to 60 frames per second
-            clock.tick(30)
+            clock.tick(60)
 
 
 #if __name__ == "__main__":
