@@ -19,6 +19,7 @@ from Colors import *
 import random
 from CurrencyList import CUR_LIST
 from FontHandler import *
+import Vue
 
 TILE_IMG_ONE = pygame.image.load("data/img/Tile1.png")
 TILE_IMG_TWO = pygame.image.load("data/img/Tile2.png")
@@ -28,7 +29,7 @@ class game():
         self.showText = options["Text Overlay"]
         self.currency = CUR_LIST[int(options["Currency"])]
         self.gameGrid = Grid.grid()
-
+        
         pygame.init()
 
         self.score = 0
@@ -42,7 +43,7 @@ class game():
         # Set the width and height of the screen [width, height]
         WINDOW_SIZE = [WINDOW_LENGHT , WINDOW_HEIGHT]
         screen = pygame.display.set_mode(WINDOW_SIZE)
-
+        self.vue = Vue.vue(screen,self.gameGrid)
         pygame.display.set_caption("Coin combiner: Level-1")
 
         # Loop until the user clicks the close button.
@@ -126,41 +127,28 @@ class game():
                     coin = selCur.getCoinById(self.gameGrid.getTileValue(row,column))
                     color = coin.getCol()
 
-
                     if not selCur.getCoinById(self.gameGrid.getTileValue(row,column)).getImg() == "":
-                        color = WHITE
-
-                        pygame.draw.rect(screen,
-                                        color,
-                                        [(MARGIN + WIDTH) * column + MARGIN,
-                                        (MARGIN + HEIGHT) * row + MARGIN,
-                                        WIDTH,
-                                        HEIGHT])
-                        imgTile = TILE_IMG_ONE
-                        imgTile = pygame.transform.scale(imgTile, (WIDTH, HEIGHT))
-                        screen.blit(imgTile,[(MARGIN + WIDTH) * column + MARGIN,
-                                    (MARGIN + HEIGHT) * row + MARGIN,
-                                    WIDTH,
-                                    HEIGHT])
-                        coin = selCur.getCoinById(self.gameGrid.getTileValue(row,column))
-                        imgC = coin.getImg()
-                        scale = coin.getScale()/100
-                        imgC = pygame.transform.scale(imgC,(WIDTH,HEIGHT))
-                        screen.blit(imgC,
-                                        [
-                                            ((MARGIN + WIDTH)* column + MARGIN),
-                                            ((MARGIN + HEIGHT ) * row+ MARGIN),
-                                        ])
+                        self.vue.printEmptySquare(column,row)
+                        if not self.gameGrid.getTileValue(row,column) == 0:
+                            coin = selCur.getCoinById(self.gameGrid.getTileValue(row,column))
+                            imgC = coin.getImg()
+                            scale = coin.getScale()/100
+                            imgC = pygame.transform.scale(imgC,(WIDTH,HEIGHT))
+                            screen.blit(imgC,
+                                            [
+                                                ((MARGIN + WIDTH)* column + MARGIN),
+                                                ((MARGIN + HEIGHT ) * row+ MARGIN),
+                                            ])
                     else:
                         if self.gameGrid.getTileValue(row,column) == 0:
                             color = WHITE
-
                         pygame.draw.rect(screen,
                                         color,
                                         [(MARGIN + WIDTH) * column + MARGIN,
                                         (MARGIN + HEIGHT) * row + MARGIN,
                                         WIDTH,
                                         HEIGHT])
+
                     if not self.gameGrid.getTileValue(row,column) == 0:
                         if coin.getVal() >= 100:
                             curType = selCur.getNType()
@@ -195,5 +183,5 @@ class game():
             clock.tick(30)
 
 
-if __name__ == "__main__":
-    game()
+#if __name__ == "__main__":
+    #game()
